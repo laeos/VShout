@@ -54,7 +54,7 @@ Partial Class Form1
         'CommandBox
         '
         Me.CommandBox.Enabled = False
-        Me.CommandBox.Location = New System.Drawing.Point(12, 594)
+        Me.CommandBox.Location = New System.Drawing.Point(12, 606)
         Me.CommandBox.Name = "CommandBox"
         Me.CommandBox.Size = New System.Drawing.Size(687, 26)
         Me.CommandBox.TabIndex = 3
@@ -62,7 +62,7 @@ Partial Class Form1
         'SendButton
         '
         Me.SendButton.Enabled = False
-        Me.SendButton.Location = New System.Drawing.Point(719, 582)
+        Me.SendButton.Location = New System.Drawing.Point(719, 594)
         Me.SendButton.Name = "SendButton"
         Me.SendButton.Size = New System.Drawing.Size(90, 50)
         Me.SendButton.TabIndex = 4
@@ -76,7 +76,7 @@ Partial Class Form1
         Me.LogBox.Name = "LogBox"
         Me.LogBox.ReadOnly = True
         Me.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-        Me.LogBox.Size = New System.Drawing.Size(687, 398)
+        Me.LogBox.Size = New System.Drawing.Size(1373, 398)
         Me.LogBox.TabIndex = 5
         '
         'Label2
@@ -108,7 +108,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(899, 669)
+        Me.ClientSize = New System.Drawing.Size(1406, 669)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.NodeName)
         Me.Controls.Add(Me.Label2)

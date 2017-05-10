@@ -16,8 +16,9 @@ Public Class Form1
 
         ' Add any initialization after the InitializeComponent() call.
 
-        ' dumb unique name
+        ' dumb unique nameS
         NodeName.Text = Guid.NewGuid().ToString()
+        _Zyre = New Zyre(NodeName.Text, True, AddressOf LogZyre)
 
     End Sub
 
@@ -29,6 +30,10 @@ Public Class Form1
             Return
         End If
         LogBox.AppendText(the_log)
+    End Sub
+
+    Private Sub LogZyre(ByVal the_log As String)
+        LogString("ZYRE: " + the_log + Environment.NewLine)
     End Sub
 
     ' new client joined group
@@ -76,9 +81,7 @@ Public Class Form1
         LogString("RECEIVED: " + e.ToString() + Environment.NewLine)
     End Sub
 
-
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles StartButton.Click
-        _Zyre = New Zyre(NodeName.Text)
 
         NodeName.Enabled = False
         StartButton.Enabled = False
@@ -86,7 +89,10 @@ Public Class Form1
         SendButton.Enabled = True
         CommandBox.Enabled = True
 
-        LogBox.AppendText("starting up" + Environment.NewLine)
+        Dim major, minor, patch As Integer
+        _Zyre.Version(major, minor, patch)
+
+        LogBox.AppendText("starting up v" + CStr(major) + "." + CStr(minor) + "." + CStr(patch) + Environment.NewLine)
 
         AddHandler _Zyre.JoinEvent, AddressOf Zyre_JoinEvent
         AddHandler _Zyre.ShoutEvent, AddressOf Zyre_ShoutEvent
@@ -112,7 +118,6 @@ Public Class Form1
         CommandBox.Enabled = False
 
         _Zyre.Stop()
-        _Zyre = Nothing
     End Sub
 
     Private Sub SendButton_Click(sender As Object, e As EventArgs) Handles SendButton.Click
@@ -126,5 +131,9 @@ Public Class Form1
         LogBox.AppendText("SHOUT: " + CommandBox.Text + Environment.NewLine)
         CommandBox.Text = ""
 
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        _Zyre.Dispose()
     End Sub
 End Class
