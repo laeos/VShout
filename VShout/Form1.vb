@@ -20,6 +20,17 @@ Public Class Form1
         NodeName.Text = Guid.NewGuid().ToString()
         _Zyre = New Zyre(NodeName.Text, True, AddressOf LogZyre)
 
+
+        AddHandler _Zyre.JoinEvent, AddressOf Zyre_JoinEvent
+        AddHandler _Zyre.ShoutEvent, AddressOf Zyre_ShoutEvent
+        AddHandler _Zyre.EnterEvent, AddressOf Zyre_EnterEvent
+        AddHandler _Zyre.StopEvent, AddressOf Zyre_StopEvent
+        AddHandler _Zyre.ExitEvent, AddressOf Zyre_ExitEvent
+        AddHandler _Zyre.EvasiveEvent, AddressOf Zyre_EvasiveEvent
+        AddHandler _Zyre.LeaveEvent, AddressOf Zyre_LeaveEvent
+        AddHandler _Zyre.WhisperEvent, AddressOf Zyre_WhisperEvent
+
+
     End Sub
 
     ' events do not happen on main/gui thread, so we must push them off on the right thread 
@@ -93,15 +104,6 @@ Public Class Form1
         _Zyre.Version(major, minor, patch)
 
         LogBox.AppendText("starting up v" + CStr(major) + "." + CStr(minor) + "." + CStr(patch) + Environment.NewLine)
-
-        AddHandler _Zyre.JoinEvent, AddressOf Zyre_JoinEvent
-        AddHandler _Zyre.ShoutEvent, AddressOf Zyre_ShoutEvent
-        AddHandler _Zyre.EnterEvent, AddressOf Zyre_EnterEvent
-        AddHandler _Zyre.StopEvent, AddressOf Zyre_StopEvent
-        AddHandler _Zyre.ExitEvent, AddressOf Zyre_ExitEvent
-        AddHandler _Zyre.EvasiveEvent, AddressOf Zyre_EvasiveEvent
-        AddHandler _Zyre.LeaveEvent, AddressOf Zyre_LeaveEvent
-        AddHandler _Zyre.WhisperEvent, AddressOf Zyre_WhisperEvent
 
         ' set public name
         _Zyre.SetName(NodeName.Text)
