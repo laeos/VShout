@@ -1,3 +1,6 @@
 [submodule "Zyre"]
 	path = Zyre
 	url = https://github.com/NetMQ/Zyre.git
+[submodule "NetMQ"]
+	path = NetMQ
+	url = git@github.com:laeos/netmq.git
