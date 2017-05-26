@@ -30,6 +30,7 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.NodeName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.ClearButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'StartButton
@@ -53,16 +54,18 @@ Partial Class Form1
         '
         'CommandBox
         '
+        Me.CommandBox.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.CommandBox.Enabled = False
-        Me.CommandBox.Location = New System.Drawing.Point(12, 606)
+        Me.CommandBox.Location = New System.Drawing.Point(16, 168)
         Me.CommandBox.Name = "CommandBox"
-        Me.CommandBox.Size = New System.Drawing.Size(687, 26)
+        Me.CommandBox.Size = New System.Drawing.Size(832, 26)
         Me.CommandBox.TabIndex = 3
         '
         'SendButton
         '
+        Me.SendButton.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.SendButton.Enabled = False
-        Me.SendButton.Location = New System.Drawing.Point(719, 594)
+        Me.SendButton.Location = New System.Drawing.Point(854, 156)
         Me.SendButton.Name = "SendButton"
         Me.SendButton.Size = New System.Drawing.Size(90, 50)
         Me.SendButton.TabIndex = 4
@@ -71,18 +74,21 @@ Partial Class Form1
         '
         'LogBox
         '
-        Me.LogBox.Location = New System.Drawing.Point(12, 190)
+        Me.LogBox.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LogBox.Location = New System.Drawing.Point(12, 259)
         Me.LogBox.Multiline = True
         Me.LogBox.Name = "LogBox"
         Me.LogBox.ReadOnly = True
-        Me.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-        Me.LogBox.Size = New System.Drawing.Size(1373, 398)
+        Me.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.LogBox.Size = New System.Drawing.Size(1799, 572)
         Me.LogBox.TabIndex = 5
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 167)
+        Me.Label2.Location = New System.Drawing.Point(12, 236)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(89, 20)
         Me.Label2.TabIndex = 8
@@ -104,11 +110,21 @@ Partial Class Form1
         Me.Label3.TabIndex = 10
         Me.Label3.Text = "Enter Unique Node Name:"
         '
+        'ClearButton
+        '
+        Me.ClearButton.Location = New System.Drawing.Point(462, 80)
+        Me.ClearButton.Name = "ClearButton"
+        Me.ClearButton.Size = New System.Drawing.Size(195, 50)
+        Me.ClearButton.TabIndex = 11
+        Me.ClearButton.Text = "Clear Output"
+        Me.ClearButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1406, 669)
+        Me.ClientSize = New System.Drawing.Size(1823, 843)
+        Me.Controls.Add(Me.ClearButton)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.NodeName)
         Me.Controls.Add(Me.Label2)
@@ -132,4 +148,5 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents NodeName As TextBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents ClearButton As Button
 End Class

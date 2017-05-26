@@ -4,6 +4,7 @@ Imports NetMQ
 Imports NetMQ.Zyre
 Imports NetMQ.Zyre.ZyreEvents
 
+Imports System.Net.NetworkInformation
 
 Public Class Form1
 
@@ -31,7 +32,8 @@ Public Class Form1
         AddHandler _Zyre.LeaveEvent, AddressOf Zyre_LeaveEvent
         AddHandler _Zyre.WhisperEvent, AddressOf Zyre_WhisperEvent
 
-
+        AddHandler NetworkChange.NetworkAvailabilityChanged, AddressOf NetworkAvailabilityChangedEventHandler
+        AddHandler NetworkChange.NetworkAddressChanged, AddressOf NetworkAddressChangedEventHandler
     End Sub
 
     ' events do not happen on main/gui thread, so we must push them off on the right thread 
@@ -93,6 +95,50 @@ Public Class Form1
         LogString("RECEIVED: " + e.ToString() + Environment.NewLine)
     End Sub
 
+    Private Sub NetworkAvailabilityChangedEventHandler(sender As Object, e As NetworkAvailabilityEventArgs)
+        Dim thing As String
+
+        thing = "available"
+        If (Not e.IsAvailable) Then
+            thing = "not " + thing
+        End If
+        LogString("Network Changed: Is ready: " + thing + Environment.NewLine)
+        If (NetworkInterface.GetIsNetworkAvailable()) Then
+            LogString("AvailabilityChanged: Network IS available!" + Environment.NewLine)
+        Else
+            LogString("AvailabilityChanged: Network is NOT available!" + Environment.NewLine)
+        End If
+    End Sub
+
+    Private Sub NetworkAddressChangedEventHandler(sender As Object, e As EventArgs)
+        LogString("AddressChanged: some network address changed" + Environment.NewLine)
+
+        Dim adaptors As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
+        Dim n As NetworkInterface
+
+        For Each n In adaptors
+            LogString(
+            "Name: " + n.Name + " " +
+            "Status: " + n.OperationalStatus.ToString() + " " +
+            "Type: " + n.NetworkInterfaceType.ToString() + Environment.NewLine)
+
+            Dim thing As List(Of UnicastIPAddressInformation) = n.GetIPProperties().UnicastAddresses.ToList()
+            Dim ip As UnicastIPAddressInformation
+            For Each ip In thing
+                LogString("   ADDRESSES: " + ip.Address.ToString() + Environment.NewLine)
+            Next
+
+
+        Next
+
+
+        If (NetworkInterface.GetIsNetworkAvailable()) Then
+            LogString("AddressChanged: Network IS available!" + Environment.NewLine)
+        Else
+            LogString("AddressChanged: Network is NOT available!" + Environment.NewLine)
+        End If
+    End Sub
+
     Private Sub StartButton_Click(sender As Object, e As EventArgs) Handles StartButton.Click
 
         NodeName.Enabled = False
@@ -138,5 +184,9 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         _Zyre.Dispose()
+    End Sub
+
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+        LogBox.Clear()
     End Sub
 End Class
