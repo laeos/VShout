@@ -20,6 +20,7 @@ Public Class Form1
         NodeName.Text = Guid.NewGuid().ToString()
         _Zyre = New Zyre(NodeName.Text, True, AddressOf LogZyre)
 
+        _Zyre.SetInterface("*")
 
         AddHandler _Zyre.JoinEvent, AddressOf Zyre_JoinEvent
         AddHandler _Zyre.ShoutEvent, AddressOf Zyre_ShoutEvent
